@@ -1,0 +1,22 @@
+<main>
+  <h1>{{ name }}</h1>
+  <p>
+    This is a view template based on Angular.
+  </p>
+  <div *ngIf="myUniverse">
+    <p>
+      Universe: {{ myUniverse.name }}
+    </p>
+    <ul>
+      <li *ngFor="let model of myUniverse.models.values()">
+        {{ model.name }}
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="myUniverse === null">
+    No universe specified
+  </div>
+  <div *ngIf="myUniverse === undefined">
+    Loading universe...
+  </div>
+</main>
