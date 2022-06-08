@@ -14,9 +14,9 @@ import {environment} from '../environments/environment';
     VyzeModule,
   ],
   providers: [
-    {provide: 'systemUrl', useValue: 'http://localhost:9131/api'},
-    {provide: 'streamUrl', useValue: 'ws://localhost:9131/api'},
-    {provide: 'apiUrl', useValue: 'http://localhost:9150'},
+    {provide: 'systemUrl', useValue: 'https://api.vyze.io/system'},
+    {provide: 'streamUrl', useValue: 'wss://api.vyze.io/system'},
+    {provide: 'apiUrl', useValue: 'https://api.vyze.io/service'},
   ],
   bootstrap: []
 })
