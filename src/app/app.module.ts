@@ -14,8 +14,8 @@ import {environment} from '../environments/environment';
     VyzeModule,
   ],
   providers: [
-    {provide: 'systemUrl', useValue: 'https://api.vyze.io/system'},
-    {provide: 'streamUrl', useValue: 'wss://api.vyze.io/system'},
+    {provide: 'systemUrl', useValue: 'https://api.vyze.io/system/api'},
+    {provide: 'streamUrl', useValue: 'wss://api.vyze.io/system/api'},
     {provide: 'apiUrl', useValue: 'https://api.vyze.io/service'},
   ],
   bootstrap: []
