@@ -35,28 +35,28 @@ export class MyViewComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    // Subscribe to universe
-    this.vyze.universe.subscribe(async (universe: Universe | undefined) => {
-      this.myUniverse = universe;
-    });
+    this.vyze.service.setToken(this.token);
 
     if (this.universe) {
       // Load universe
-      await this.vyze.loadUniverse(this.universe, this.token);
-    }
-
-    // Load profile
-    const tokens = await this.vyze.service.getAccessTokens(this.profile ?? 'default', this.universe, this.token);
-    if (tokens) {
-      await this.vyze.system.addAccessTokens(tokens);
+      await this.vyze.loadUniverse(this.universe);
     }
 
     await this.vyze.stream.connect();
 
-    const spaceTokens = this.vyze.system.getAccessTokens(['main_read', 'model_extend']);
-    for (const token of spaceTokens) {
-      await this.vyze.stream.registerSpaceToken(token);
+    // Load profile
+    if (this.profile) {
+      const layerProfile = await this.vyze.service.getLayerProfile(this.profile);
+      if (layerProfile) {
+        this.vyze.system.layerProfile = layerProfile;
+        await this.vyze.stream.registerLayerProfile(layerProfile);
+      }
     }
+
+    // Subscribe to universe
+    this.vyze.universe.subscribe(async u => {
+      this.myUniverse = u;
+    });
   }
 
 }
