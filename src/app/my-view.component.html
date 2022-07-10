@@ -1,22 +1,36 @@
 <main>
   <h1>{{ name }}</h1>
   <p>
-    This is a view template based on Angular.
+    This is a VYZE view template based on Angular.
   </p>
-  <div *ngIf="myUniverse">
-    <p>
-      Universe: {{ myUniverse.name }}
-    </p>
+
+  <section>
+    <div *ngIf="myUniverse">
+      <h2>Universe: {{ myUniverse.name }}</h2>
+      <p>
+        {{ myUniverse.description }}
+      </p>
+      <h3>Models</h3>
+      <ul>
+        <li *ngFor="let model of myUniverse.models.values()">
+          <strong>{{ model.name }}</strong>, {{ model.description }}
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="myUniverse === null">
+      No universe specified
+    </div>
+    <div *ngIf="myUniverse === undefined">
+      Loading universe...
+    </div>
+  </section>
+
+  <section>
+    <h2>Next steps</h2>
     <ul>
-      <li *ngFor="let model of myUniverse.models.values()">
-        {{ model.name }}
-      </li>
+      <li>Add new components via <code>ng g component MyComponent</code>.</li>
+      <li>Use the system, stream and service clients to use the VYZE database. They can be accessed via the <code>VyzeService</code>, e.g. <code>this.vyze.system.createObject(...)</code>.</li>
+      <li>Check the tutorials and documentation on the <a href="https://vyze.io">VYZE website</a>.</li>
     </ul>
-  </div>
-  <div *ngIf="myUniverse === null">
-    No universe specified
-  </div>
-  <div *ngIf="myUniverse === undefined">
-    Loading universe...
-  </div>
+  </section>
 </main>

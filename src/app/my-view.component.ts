@@ -17,13 +17,13 @@ export class MyViewComponent implements OnInit {
 
   @Input()
   /**
-   * Access profile containing spaces.
+   * Layer profile containing spaces.
    */
   public profile?: string;
 
   @Input()
   /**
-   * Access token granting access to the access profile and private universe information.
+   * Service token granting access to VYZE services such as universe modelling or layer profile token generation.
    */
   public token?: string;
 
@@ -42,6 +42,7 @@ export class MyViewComponent implements OnInit {
       await this.vyze.loadUniverse(this.universe);
     }
 
+    // Comment out this line if you don't need streamed connections:
     await this.vyze.stream.connect();
 
     // Load profile
