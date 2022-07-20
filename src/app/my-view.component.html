@@ -12,7 +12,7 @@
       </p>
       <h3>Models</h3>
       <ul>
-        <li *ngFor="let model of myUniverse.models.values()">
+        <li *ngFor="let model of myUniverse.models.array">
           <strong>{{ model.name }}</strong>, {{ model.description }}
         </li>
       </ul>
