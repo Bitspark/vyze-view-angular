@@ -5,22 +5,19 @@
   </p>
 
   <section>
-    <div *ngIf="myUniverse">
-      <h2>Universe: {{ myUniverse.name }}</h2>
+    <div *ngIf="vyze.universe">
+      <h2>Universe: {{ vyze.universe.name }}</h2>
       <p>
-        {{ myUniverse.description }}
+        {{ vyze.universe.description }}
       </p>
       <h3>Models</h3>
       <ul>
-        <li *ngFor="let model of myUniverse.models.array">
+        <li *ngFor="let model of vyze.universe.models.array">
           <strong>{{ model.name }}</strong>, {{ model.description }}
         </li>
       </ul>
     </div>
-    <div *ngIf="myUniverse === null">
-      No universe specified
-    </div>
-    <div *ngIf="myUniverse === undefined">
+    <div *ngIf="vyze.universe === undefined">
       Loading universe...
     </div>
   </section>

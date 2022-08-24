@@ -29,9 +29,7 @@ export class MyViewComponent implements OnInit {
 
   public name = 'My View';
 
-  public myUniverse?: Universe | null;
-
-  constructor(private vyze: VyzeService) {
+  constructor(public vyze: VyzeService) {
   }
 
   async ngOnInit(): Promise<void> {
@@ -42,22 +40,13 @@ export class MyViewComponent implements OnInit {
       await this.vyze.loadUniverse(this.universe);
     }
 
-    // Comment out this line if you don't need streamed connections:
-    await this.vyze.stream.connect();
-
     // Load profile
     if (this.profile) {
       const layerProfile = await this.vyze.service.getLayerProfile(this.profile);
       if (layerProfile) {
         this.vyze.system.layerProfile = layerProfile;
-        await this.vyze.stream.registerLayerProfile(layerProfile);
       }
     }
-
-    // Subscribe to universe
-    this.vyze.universe.subscribe(async u => {
-      this.myUniverse = u;
-    });
   }
 
 }
