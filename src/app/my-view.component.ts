@@ -1,6 +1,5 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {VyzeService} from 'ng-vyze';
-import {Universe} from 'vyze';
 
 @Component({
   templateUrl: './my-view.component.html',
