@@ -9,6 +9,8 @@ import {Id} from "vyze";
 })
 export class MyViewComponent implements OnInit {
 
+  public name = 'My View';
+
   @Input()
   /**
    * Universe name containing all models.
@@ -30,7 +32,7 @@ export class MyViewComponent implements OnInit {
   @Input()
   public set context(context: string | undefined) {
     this._context = context;
-    this.reload();
+    this.reload().then();
   }
   /**
    * Context of this component containing an id or a list of ids.
@@ -40,9 +42,8 @@ export class MyViewComponent implements OnInit {
   }
   private _context?: string;
 
-  public name = 'My View';
-
   public contextId?: Id;
+
   public contextIds?: Id[];
 
   constructor(public vyze: VyzeService) {
@@ -52,11 +53,9 @@ export class MyViewComponent implements OnInit {
     this.vyze.service.setToken(this.token);
 
     if (this.universe) {
-      // Load universe
       await this.vyze.loadUniverse(this.universe);
     }
 
-    // Load profile
     if (this.profile) {
       await this.vyze.loadProfile(this.profile);
     }
@@ -66,6 +65,7 @@ export class MyViewComponent implements OnInit {
     if (!this.context) {
       return;
     }
+
     const context = JSON.parse(this.context);
     if (typeof context === 'string') {
       this.contextId = context;
