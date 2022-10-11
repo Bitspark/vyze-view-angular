@@ -23,6 +23,21 @@
   </section>
 
   <section>
+    <div *ngIf="contextId">
+      Context ID: {{contextId}}
+    </div>
+    <div *ngIf="contextIds">
+      Context IDs:
+      <ul>
+        <li *ngFor="let contextId of contextIds">{{contextId}}</li>
+      </ul>
+    </div>
+    <div *ngIf="!context">
+      No context
+    </div>
+  </section>
+
+  <section>
     <h2>Next steps</h2>
     <ul>
       <li>Add new components via <code>ng g component MyComponent</code>.</li>

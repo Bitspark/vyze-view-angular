@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {VyzeService} from 'ng-vyze';
+import {Id} from "vyze";
 
 @Component({
   templateUrl: './my-view.component.html',
@@ -26,7 +27,23 @@ export class MyViewComponent implements OnInit {
    */
   public token?: string;
 
+  @Input()
+  public set context(context: string | undefined) {
+    this._context = context;
+    this.reload();
+  }
+  /**
+   * Context of this component containing an id or a list of ids.
+   */
+  public get context(): string | undefined {
+    return this._context;
+  }
+  private _context?: string;
+
   public name = 'My View';
+
+  public contextId?: Id;
+  public contextIds?: Id[];
 
   constructor(public vyze: VyzeService) {
   }
@@ -41,10 +58,19 @@ export class MyViewComponent implements OnInit {
 
     // Load profile
     if (this.profile) {
-      const layerProfile = await this.vyze.service.getLayerProfile(this.profile);
-      if (layerProfile) {
-        this.vyze.system.layerProfile = layerProfile;
-      }
+      await this.vyze.loadProfile(this.profile);
+    }
+  }
+
+  async reload() {
+    if (!this.context) {
+      return;
+    }
+    const context = JSON.parse(this.context);
+    if (typeof context === 'string') {
+      this.contextId = context;
+    } else if (Array.isArray(context)) {
+      this.contextIds = context;
     }
   }
 
